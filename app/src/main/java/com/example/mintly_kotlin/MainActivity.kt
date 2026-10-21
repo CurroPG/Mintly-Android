@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MintlyKotlinTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(
+                    HomeScreen (
                         modifier = Modifier.padding(innerPadding)
                             .consumeWindowInsets(innerPadding)
                     )
