@@ -7,6 +7,7 @@ import com.example.mintly_kotlin.core.navigation.Route
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier,
     toCardCollection: () -> Unit,
     toShop: () -> Unit,
     toRegister: () -> Unit,
