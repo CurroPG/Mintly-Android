@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.mintly_kotlin.core.navigation.MintlyNavHost
 import com.example.mintly_kotlin.ui.HomeScreen
 import com.example.mintly_kotlin.ui.theme.MintlyKotlinTheme
 
@@ -22,10 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MintlyKotlinTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(
-                        modifier = Modifier.padding(innerPadding)
-                            .consumeWindowInsets(innerPadding)
-                    )
+                    MintlyNavHost()
                 }
             }
         }
