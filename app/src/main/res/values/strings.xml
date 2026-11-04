@@ -1,3 +1,64 @@
 <resources>
-    <string name="app_name">Mintly-Kotlin</string>
+    <string name="app_name">Mintly</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="cart">Cart</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="add">Add</string>
+    <string name="increase">Increase</string>
+    <string name="decrease">Decrease</string>
+    <string name="filters">Filters</string>
+    <string name="scan_card">Scan card</string>
+    <string name="play">Play</string>
+    <string name="see_all">See all</string>
+
+    <!-- Cards -->
+    <string name="level_rarity">Lv. %1$d · %2$s</string>
+    <string name="hp_value">HP %1$d</string>
+    <string name="attack_value">ATK %1$d</string>
+
+    <!-- Home -->
+    <string name="your_collection">Your collection</string>
+    <string name="latest_offers">Latest deals!</string>
+    <string name="competitive">Competitive</string>
+    <string name="season">SEASON %1$02d</string>
+    <string name="your_team">Your team</string>
+    <string name="battle">Battle!</string>
+    <string name="rank_elite">ELITE</string>
+    <string name="points">%1$d / %2$d pts</string>
+
+    <!-- Collection -->
+    <string name="my_collection">My Collection</string>
+    <string name="total_value">Total value of your collection</string>
+    <string name="search_collection">Search my collection</string>
+    <string name="cards_count">%1$d cards</string>
+    <string name="sort_value_desc">Value: high to low</string>
+
+    <!-- Cart -->
+    <string name="items_count">%1$d items</string>
+    <string name="prices_in_eur">Prices in EUR</string>
+    <string name="remove">Remove</string>
+    <string name="order_summary">Order summary</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="shipping">Shipping</string>
+    <string name="total">Total</string>
+    <string name="vat_included">VAT included</string>
+    <string name="checkout">Checkout</string>
+    <string name="secure_payment">Secure payment · Shop with confidence</string>
+
+    <!-- Shop -->
+    <string name="shop">Shop</string>
+    <string name="search_shop">Search packs, boxes, cards…</string>
+    <string name="filter_all">All</string>
+    <string name="filter_packs">Packs</string>
+    <string name="filter_boxes">Boxes</string>
+    <string name="filter_single_cards">Single cards</string>
+    <string name="filter_accessories">Accessories</string>
+    <string name="new_expansion">NEW EXPANSION</string>
+    <string name="banner_title">Emerald Mist</string>
+    <string name="banner_subtitle">Packs and boxes now available</string>
+    <string name="see_products">See products</string>
+    <string name="weekly_offers">Deals of the week</string>
 </resources>

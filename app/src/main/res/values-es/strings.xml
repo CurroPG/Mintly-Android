@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mintly</string>
+
+    <!-- Comunes -->
+    <string name="back">Volver</string>
+    <string name="cart">Carrito</string>
+    <string name="settings">Ajustes</string>
+    <string name="profile">Perfil</string>
+    <string name="add">Añadir</string>
+    <string name="increase">Aumentar</string>
+    <string name="decrease">Disminuir</string>
+    <string name="filters">Filtros</string>
+    <string name="scan_card">Escanear carta</string>
+    <string name="play">Jugar</string>
+    <string name="see_all">Ver todo</string>
+
+    <!-- Cartas -->
+    <string name="level_rarity">Nv. %1$d · %2$s</string>
+    <string name="hp_value">PS %1$d</string>
+    <string name="attack_value">ATQ %1$d</string>
+
+    <!-- Inicio -->
+    <string name="your_collection">Tu colección</string>
+    <string name="latest_offers">¡Últimas ofertas!</string>
+    <string name="competitive">Competitivo</string>
+    <string name="season">TEMPORADA %1$02d</string>
+    <string name="your_team">Tu equipo</string>
+    <string name="battle">¡A la batalla!</string>
+    <string name="rank_elite">ÉLITE</string>
+    <string name="points">%1$d / %2$d pts</string>
+
+    <!-- Colección -->
+    <string name="my_collection">Mi Colección</string>
+    <string name="total_value">Valor total de tu colección</string>
+    <string name="search_collection">Buscar en mi colección</string>
+    <string name="cards_count">%1$d cartas</string>
+    <string name="sort_value_desc">Valor: de mayor a menor</string>
+
+    <!-- Carrito -->
+    <string name="items_count">%1$d artículos</string>
+    <string name="prices_in_eur">Precios en EUR</string>
+    <string name="remove">Eliminar</string>
+    <string name="order_summary">Resumen del pedido</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="shipping">Envío</string>
+    <string name="total">Total</string>
+    <string name="vat_included">IVA incluido</string>
+    <string name="checkout">Finalizar compra</string>
+    <string name="secure_payment">Pago seguro · Compra con confianza</string>
+
+    <!-- Tienda -->
+    <string name="shop">Tienda</string>
+    <string name="search_shop">Buscar sobres, cajas, cartas…</string>
+    <string name="filter_all">Todo</string>
+    <string name="filter_packs">Sobres</string>
+    <string name="filter_boxes">Cajas</string>
+    <string name="filter_single_cards">Cartas sueltas</string>
+    <string name="filter_accessories">Accesorios</string>
+    <string name="new_expansion">NUEVA EXPANSIÓN</string>
+    <string name="banner_title">Bruma Esmeralda</string>
+    <string name="banner_subtitle">Sobres y cajas ya disponibles</string>
+    <string name="see_products">Ver productos</string>
+    <string name="weekly_offers">Ofertas de la semana</string>
+</resources>
