@@ -1,4 +1,4 @@
-package com.example.mintly_kotlin.core.ui
+package com.example.mintly_kotlin.features.register
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button

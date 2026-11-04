@@ -5,11 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mintly_kotlin.core.ui.CollectionScreen
-import com.example.mintly_kotlin.core.ui.GameScreen
-import com.example.mintly_kotlin.core.ui.HomeScreen
-import com.example.mintly_kotlin.core.ui.RegisterScreen
-import com.example.mintly_kotlin.core.ui.ShopScreen
+import com.example.mintly_kotlin.features.collection.CollectionScreen
+import com.example.mintly_kotlin.features.game.GameScreen
+import com.example.mintly_kotlin.features.home.HomeScreen
+import com.example.mintly_kotlin.features.register.RegisterScreen
+import com.example.mintly_kotlin.features.shop.ShopScreen
 
 @Composable
 fun MintlyNavHost(controller: NavHostController = rememberNavController()){
