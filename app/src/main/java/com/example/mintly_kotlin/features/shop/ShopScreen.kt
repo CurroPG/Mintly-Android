@@ -6,7 +6,9 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun ShopScreen(
-    toHome: () -> Unit
+    toHome: () -> Unit,
+    toCart: () -> Unit,
+    toGame: () -> Unit
 ){
     Column {
         Text("SHOP")

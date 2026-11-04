@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 
 sealed interface Route{
     @Serializable
+    object Cart: Route
+    @Serializable
     object Shop: Route
 
     @Serializable
