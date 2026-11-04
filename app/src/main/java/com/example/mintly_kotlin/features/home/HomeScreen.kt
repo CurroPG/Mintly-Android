@@ -1,4 +1,4 @@
-package com.example.mintly_kotlin.ui
+package com.example.mintly_kotlin.core.ui
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button

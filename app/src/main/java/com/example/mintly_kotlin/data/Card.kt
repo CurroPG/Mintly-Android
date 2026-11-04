@@ -6,5 +6,9 @@ data class Card (
     val price: Double,
     val image: Int,
     val type: String,
-    val uploadDate: String
+    val uploadDate: String,
+    val level: Int = 0,
+    val rarity: String = "",
+    val hp: Int = 0,
+    val attack: Int = 0
 )

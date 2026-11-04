@@ -1,4 +1,4 @@
-package com.example.mintly_kotlin.ui
+package com.example.mintly_kotlin.features.collection
 
 import androidx.lifecycle.ViewModel
 import com.example.mintly_kotlin.data.Card

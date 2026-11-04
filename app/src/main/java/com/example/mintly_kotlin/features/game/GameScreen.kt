@@ -1,4 +1,4 @@
-package com.example.mintly_kotlin.ui
+package com.example.mintly_kotlin.core.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
