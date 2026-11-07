@@ -62,4 +62,18 @@
     <string name="banner_subtitle">Sobres y cajas ya disponibles</string>
     <string name="see_products">Ver productos</string>
     <string name="weekly_offers">Ofertas de la semana</string>
+
+    <!-- Registro -->
+    <string name="create_account">Crear cuenta</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="full_name_hint">Tu nombre</string>
+    <string name="email">Correo electrónico</string>
+    <string name="email_hint">nombre@correo.com</string>
+    <string name="password">Contraseña</string>
+    <string name="password_hint">Mínimo 8 caracteres</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="confirm_password_hint">Repite tu contraseña</string>
+    <string name="or_continue_with">O continúa con</string>
+    <string name="continue_with_google">Continuar con Google</string>
+    <string name="already_have_account">¿Ya tienes cuenta? Inicia sesión</string>
 </resources>

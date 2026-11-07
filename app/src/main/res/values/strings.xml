@@ -61,4 +61,18 @@
     <string name="banner_subtitle">Packs and boxes now available</string>
     <string name="see_products">See products</string>
     <string name="weekly_offers">Deals of the week</string>
+
+    <!-- Register -->
+    <string name="create_account">Create account</string>
+    <string name="full_name">Full name</string>
+    <string name="full_name_hint">Your name</string>
+    <string name="email">Email</string>
+    <string name="email_hint">name@email.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">At least 8 characters</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="confirm_password_hint">Repeat your password</string>
+    <string name="or_continue_with">Or continue with</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="already_have_account">Already have an account? Sign in</string>
 </resources>
