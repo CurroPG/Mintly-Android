@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mintly_kotlin.R
 import com.example.mintly_kotlin.core.ui.components.CardItem
 import com.example.mintly_kotlin.core.ui.components.MintlyTopBar
@@ -38,9 +39,7 @@ fun CollectionScreen(
     toHome: () -> Unit,
     viewModel: CollectionViewModel = hiltViewModel()
 ) {
-    var search by remember { mutableStateOf("") }
-    val cards = viewModel.cards.sortedByDescending { it.price }
-    val total = cards.sumOf { it.price }
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -72,16 +71,16 @@ fun CollectionScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Text(
-                        total.toEuros(),
+                        state.totalAmount.toEuros(),
                         style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
             item(span = { GridItemSpan(maxLineSpan) }) {
                 SearchField(
-                    value = search,
-                    onValueChange = { search = it },
+                    value = state.text,
+                    onValueChange = viewModel::changeText,
                     placeholder = stringResource(R.string.search_collection)
                 )
             }
@@ -91,7 +90,7 @@ fun CollectionScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        stringResource(R.string.cards_count, cards.size),
+                        stringResource(R.string.cards_count, state.cardList.size),
                         style = MaterialTheme.typography.labelLarge
                     )
                     Text(
@@ -101,7 +100,7 @@ fun CollectionScreen(
                     )
                 }
             }
-            items(cards, key = { it.id }) { card ->
+            items(state.cardList, key = { it.id }) { card ->
                 CardItem(card = card, onClick = {})
             }
         }
