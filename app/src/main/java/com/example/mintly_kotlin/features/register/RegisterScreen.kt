@@ -14,26 +14,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mintly_kotlin.R
 import com.example.mintly_kotlin.core.ui.components.LabeledTextField
 import com.example.mintly_kotlin.core.ui.components.MintlyTopBar
 
 @Composable
 fun RegisterScreen(
-    toHome: () -> Unit
+    toHome: () -> Unit,
+    viewModel: RegisterViewModel = hiltViewModel()
 ){
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmedPassword by remember { mutableStateOf("") }
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -51,24 +48,24 @@ fun RegisterScreen(
             item {
                 LabeledTextField(
                     label = stringResource(R.string.full_name),
-                    value = name,
-                    onValueChange = { name = it },
+                    value = state.name,
+                    onValueChange = viewModel::changeName ,
                     placeholder = stringResource(R.string.full_name_hint)
                 )
             }
             item {
                 LabeledTextField (
                     label = stringResource(R.string.email),
-                    value = email,
-                    onValueChange = { email = it },
+                    value = state.mail,
+                    onValueChange = viewModel::changeMail,
                     placeholder = stringResource(R.string.email_hint)
                 )
             }
             item {
                 LabeledTextField (
                     label = stringResource(R.string.password),
-                    value = password,
-                    onValueChange = { password = it },
+                    value = state.password,
+                    onValueChange = viewModel::changePassword,
                     placeholder = stringResource(R.string.password_hint),
                     visualTransformation = PasswordVisualTransformation()
                 )
@@ -76,8 +73,8 @@ fun RegisterScreen(
             item {
                 LabeledTextField (
                     label = stringResource(R.string.confirm_password),
-                    value = confirmedPassword,
-                    onValueChange = { confirmedPassword = it },
+                    value = state.confirmedPassword,
+                    onValueChange = viewModel::changeConfirmedPassword,
                     placeholder = stringResource(R.string.confirm_password_hint),
                     visualTransformation = PasswordVisualTransformation()
                 )
@@ -85,6 +82,7 @@ fun RegisterScreen(
             item {
                 Button(
                     onClick = {},
+                    enabled = state.isValidTheCreation,
                     modifier = Modifier.fillMaxWidth().height(56.dp),
                     shape = MaterialTheme.shapes.medium,
                 ) {
