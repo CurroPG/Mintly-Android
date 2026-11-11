@@ -15,10 +15,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,15 +30,17 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun ShopScreen(
     toHome: () -> Unit,
     toCart: () -> Unit,
-    toGame: () -> Unit
+    toGame: () -> Unit,
+    viewModel: ShopViewModel = hiltViewModel()
 ){
-    var search by remember { mutableStateOf("") }
-    var selectedFilter by remember { mutableIntStateOf(R.string.filter_all) }
+    val state by viewModel.state.collectAsStateWithLifecycle()
     val filters = listOf(
         R.string.filter_all,
         R.string.filter_packs,
@@ -79,8 +77,8 @@ fun ShopScreen(
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
                 SearchField(
-                    value = search,
-                    onValueChange = { search = it },
+                    value = state.text,
+                    onValueChange = viewModel::changeText,
                     placeholder = stringResource(R.string.search_shop)
                 )
             }
@@ -88,8 +86,8 @@ fun ShopScreen(
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(filters) { filterRes ->
                         FilterChip(
-                            selected = selectedFilter == filterRes,
-                            onClick = { selectedFilter = filterRes },
+                            selected = state.filterChosen == filterRes,
+                            onClick = { viewModel.changeFilter(filterRes) },
                             label = { Text(stringResource(filterRes)) }
                         )
                     }
@@ -138,7 +136,7 @@ fun ShopScreen(
                     style = MaterialTheme.typography.titleLarge
                 )
             }
-            items(SampleData.shopOffers) { product ->
+            items(state.productList) { product ->
                 ProductCard(product = product, onClick = {})
             }
         }

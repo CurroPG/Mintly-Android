@@ -8,7 +8,8 @@ data class Product(
     val set: String,
     val price: Double,
     val oldPrice: Double? = null,
-    val image: Int
+    val image: Int,
+    val category: Int? = null
 ) {
     val discount: Int?
         get() = oldPrice?.let { ((1 - price / it) * 100).roundToInt() }
