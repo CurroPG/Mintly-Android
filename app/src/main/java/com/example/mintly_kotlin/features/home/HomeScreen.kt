@@ -36,6 +36,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,6 +45,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mintly_kotlin.R
 import com.example.mintly_kotlin.core.ui.components.CardItem
 import com.example.mintly_kotlin.core.ui.components.MintlyBottomBar
@@ -60,6 +62,8 @@ fun HomeScreen(
     toGame: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
     Scaffold { innerPadding ->
         Box(
             modifier = Modifier
@@ -83,7 +87,7 @@ fun HomeScreen(
                 }
                 item {
                     LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        items(viewModel.featuredCards, key = { it.id }) { card ->
+                        items(state.cardList, key = { it.id }) { card ->
                             CardItem(
                                 card = card,
                                 onClick = {},
