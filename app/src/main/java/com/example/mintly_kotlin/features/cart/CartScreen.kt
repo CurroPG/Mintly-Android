@@ -1,5 +1,6 @@
 package com.example.mintly_kotlin.features.cart
 
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
@@ -28,6 +28,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,18 +36,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.mintly_kotlin.R
 import com.example.mintly_kotlin.core.ui.components.MintlyTopBar
 import com.example.mintly_kotlin.core.ui.components.QuantitySelector
 import com.example.mintly_kotlin.core.ui.components.toEuros
 import com.example.mintly_kotlin.data.CartItem
-import com.example.mintly_kotlin.data.SampleData
 
 @Composable
-fun CartScreen(toHome: () -> Unit) {
-    val cartItems = SampleData.cartItems
-    val subtotal = cartItems.sumOf { it.product.price * it.quantity }
-    val shipping = 3.90
+fun CartScreen(
+    toHome: () -> Unit,
+    viewModel: CartViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -69,7 +72,7 @@ fun CartScreen(toHome: () -> Unit) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        stringResource(R.string.items_count, cartItems.size),
+                        stringResource(R.string.items_count, state.cartList.size),
                         style = MaterialTheme.typography.labelLarge
                     )
                     Text(
@@ -79,8 +82,13 @@ fun CartScreen(toHome: () -> Unit) {
                     )
                 }
             }
-            items(cartItems, key = { it.product.id }) { item ->
-                CartItemRow(item)
+            items(state.cartList, key = { it.product.id }) { item ->
+                CartItemRow(
+                    item = item,
+                    onDecrease = { viewModel.decreaseQuantity(item) },
+                    onIncrease = { viewModel.increaseQuantity(item) },
+                    onRemove = { viewModel.removeItem(item) }
+                )
             }
             item {
                 Text(
@@ -90,14 +98,23 @@ fun CartScreen(toHome: () -> Unit) {
                 )
             }
             item {
-                OrderSummary(subtotal = subtotal, shipping = shipping)
+                OrderSummary(
+                    subtotal = state.subtotal,
+                    shipping = state.shipping,
+                    total = state.total
+                )
             }
         }
     }
 }
 
 @Composable
-private fun CartItemRow(item: CartItem) {
+private fun CartItemRow(
+    item: CartItem,
+    onDecrease: () -> Unit,
+    onIncrease: () -> Unit,
+    onRemove: () -> Unit
+) {
     Card(
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
@@ -132,9 +149,13 @@ private fun CartItemRow(item: CartItem) {
                     color = MaterialTheme.colorScheme.primary
                 )
                 Spacer(Modifier.height(6.dp))
-                QuantitySelector(quantity = item.quantity, onDecrease = {}, onIncrease = {})
+                QuantitySelector(
+                    quantity = item.quantity,
+                    onDecrease = onDecrease,
+                    onIncrease = onIncrease
+                )
             }
-            TextButton(onClick = {}, modifier = Modifier.align(Alignment.Bottom)) {
+            TextButton(onClick = onRemove, modifier = Modifier.align(Alignment.Bottom)) {
                 Text(
                     stringResource(R.string.remove),
                     style = MaterialTheme.typography.bodySmall,
@@ -146,7 +167,7 @@ private fun CartItemRow(item: CartItem) {
 }
 
 @Composable
-private fun OrderSummary(subtotal: Double, shipping: Double) {
+private fun OrderSummary(subtotal: Double, shipping: Double, total: Double) {
     Card(
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
@@ -172,7 +193,7 @@ private fun OrderSummary(subtotal: Double, shipping: Double) {
                     )
                 }
                 Text(
-                    (subtotal + shipping).toEuros(),
+                    total.toEuros(),
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
