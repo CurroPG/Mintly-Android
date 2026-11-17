@@ -21,27 +21,27 @@ data class CartItemEntity(
 fun CartItemEntity.toModel(): CartItem {
     return CartItem( product =
         Product(
-            id = id,
-            name = name,
-            set = set,
-            price = price,
-            oldPrice = oldPrice,
-            image = image,
-            category = category
+            id = this.id,
+            name = this.name,
+            set = this.set,
+            price = this.price,
+            oldPrice = this.oldPrice,
+            image = this.image,
+            category = this.category
         ),
-        quantity = quantity
+        quantity = this.quantity
     )
 }
 
 fun CartItem.toEntity(): CartItemEntity {
     return CartItemEntity(
-        id = product.id,
-        name = product.name,
-        set = product.set,
-        price = product.price,
-        oldPrice = product.oldPrice,
-        image = product.image,
-        category = product.category,
-        quantity = quantity
+        id = this.product.id,
+        name = this.product.name,
+        set = this.product.set,
+        price = this.product.price,
+        oldPrice = this.product.oldPrice,
+        image = this.product.image,
+        category = this.product.category,
+        quantity = this.quantity
     )
 }
