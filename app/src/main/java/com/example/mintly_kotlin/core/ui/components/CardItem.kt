@@ -1,6 +1,5 @@
 package com.example.mintly_kotlin.core.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.example.mintly_kotlin.R
 import com.example.mintly_kotlin.data.Card as PokemonCard // pongo este nombre para que no haya conflicto
 
@@ -40,8 +40,8 @@ fun CardItem(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Column(Modifier.padding(8.dp)) {
-            Image(
-                painter = painterResource(card.image), // para poner la imagen
+            AsyncImage(
+                card.imageUrl, // para poner la imagen
                 contentDescription = card.name,
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.TopCenter,
@@ -49,7 +49,9 @@ fun CardItem(
                     .fillMaxWidth()
                     .aspectRatio(1.3f) // tamaño
                     .clip(MaterialTheme.shapes.small) // esquinas redondeadas
-                    .background(MaterialTheme.colorScheme.primaryContainer) // y por ultimo pinta el fondo
+                    .background(MaterialTheme.colorScheme.primaryContainer), // y por ultimo pinta el fondo
+                placeholder = painterResource(R.drawable.pokeball),
+                error = painterResource(R.drawable.pokeball)
             )
             Spacer(Modifier.height(8.dp))
             Text(
