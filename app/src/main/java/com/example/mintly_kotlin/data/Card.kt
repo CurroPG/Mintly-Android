@@ -4,7 +4,7 @@ data class Card (
     val id: Int,
     val name: String,
     val price: Double,
-    val image: Int,
+    val imageUrl: String? = null,
     val type: String,
     val uploadDate: String,
     val level: Int = 0,
