@@ -28,6 +28,7 @@
     <string name="battle">Battle!</string>
     <string name="rank_elite">ELITE</string>
     <string name="points">%1$d / %2$d pts</string>
+    <string name="offline_notice">No conection. Showing offline data</string>
 
     <!-- Collection -->
     <string name="my_collection">My Collection</string>
