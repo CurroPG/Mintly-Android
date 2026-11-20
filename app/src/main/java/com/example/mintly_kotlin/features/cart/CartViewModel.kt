@@ -1,12 +1,15 @@
 package com.example.mintly_kotlin.features.cart
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mintly_kotlin.data.CartItem
-import com.example.mintly_kotlin.data.SampleData
+import com.example.mintly_kotlin.data.CartRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class CartScreenState(
@@ -17,28 +20,29 @@ data class CartScreenState(
 )
 
 @HiltViewModel
-class CartViewModel @Inject constructor() : ViewModel() {
-    private val _state = MutableStateFlow(buildState(SampleData.cartItems))
-    val state: StateFlow<CartScreenState>
-        get() = _state.asStateFlow()
+class CartViewModel @Inject constructor(
+    private val repository: CartRepository
+) : ViewModel() {
+    val state: StateFlow<CartScreenState> =
+        repository.observeCart().map { buildState(it) }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = buildState(emptyList())
+            )
 
     fun increaseQuantity(item: CartItem) {
-        val newItems = state.value.cartList.map {
-            if (it.product.id == item.product.id) it.copy(quantity = it.quantity + 1) else it
-        }
-        _state.value = buildState(newItems)
+       viewModelScope.launch { repository.updateQuantity(item.product.id, item.quantity + 1 ) }
     }
 
     fun decreaseQuantity(item: CartItem) {
-        val newItems = state.value.cartList.map {
-            if (it.product.id == item.product.id && it.quantity > 1) it.copy(quantity = it.quantity - 1) else it
+        if (item.quantity > 1) {
+            viewModelScope.launch { repository.updateQuantity(item.product.id, item.quantity - 1 ) }
         }
-        _state.value = buildState(newItems)
     }
 
     fun removeItem(item: CartItem) {
-        val newItems = state.value.cartList.filter { it.product.id != item.product.id }
-        _state.value = buildState(newItems)
+        viewModelScope.launch { repository.removeProduct(item.product.id) }
     }
 
     private fun buildState(items: List<CartItem>): CartScreenState {
