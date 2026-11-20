@@ -78,6 +78,20 @@ fun HomeScreen(
                 item {
                     HomeHeader(onSettingsClick = {}, onProfileClick = toRegister)
                 }
+                if(state.isOffline){
+                    item {
+                        Text(
+                            stringResource(R.string.offline_notice),
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+
+                }
+                if (state.isLoading){
+                    item {
+                        CircularProgressIndicator(modifier = Modifier.size(24.dp))
+                    }
+                }
                 item {
                     SectionHeader(
                         title = stringResource(R.string.your_collection),

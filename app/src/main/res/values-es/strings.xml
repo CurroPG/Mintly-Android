@@ -29,6 +29,7 @@
     <string name="battle">¡A la batalla!</string>
     <string name="rank_elite">ÉLITE</string>
     <string name="points">%1$d / %2$d pts</string>
+    <string name="offline_notice">Sin conexión. Mostrando datos guardados</string>
 
     <!-- Colección -->
     <string name="my_collection">Mi Colección</string>
