@@ -24,8 +24,6 @@ fun CardEntity.toModel(): Card {
         name = this.name,
         price = this.marketPrice ?: 0.0,
         imageUrl = this.imageUrl,
-        type = "",
-        uploadDate = "",
         rarity = this.rarity ?: ""
     )
 }

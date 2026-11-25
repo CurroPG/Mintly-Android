@@ -1,7 +1,5 @@
 package com.example.mintly_kotlin.core.di
 
-import com.example.mintly_kotlin.data.CardLocalRepository
-import com.example.mintly_kotlin.data.CardRepository
 import com.example.mintly_kotlin.data.CartLocalRepository
 import com.example.mintly_kotlin.data.CartRepository
 import com.example.mintly_kotlin.data.CatalogRepository
@@ -19,10 +17,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
-    @Binds
-    abstract fun bindMintlyRepository(
-        impl: CardLocalRepository
-    ): CardRepository
 
     @Binds
     @Singleton
